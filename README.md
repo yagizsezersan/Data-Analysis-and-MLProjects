@@ -2,3 +2,5 @@
 Data Analysis Projects using mostly Python and one with R.
 
 This repository is a place to share my code and notebooks for data science projects.
+
+Reach me on [@yagizsezersan](https://www.linkedin.com/in/yagiz-sezersan/)
