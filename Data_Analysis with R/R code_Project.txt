@@ -1,0 +1,166 @@
+-----------------Cluster Analysis-----------------------------
+
+install.packages("stats")
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("ggfortify")
+library("stats")
+library("dplyr")
+library("ggplot2")
+library("ggfortify")
+
+data6 <- read.csv(file.choose(), header=T,sep=";")
+data9 <- na.omit(data6)
+View(data9)
+data7 <- data9[, c(1,11)]
+
+# Function for number of clusters
+wssplot <- function(data, nc=15, seed=1234){
+  wss <- (nrow(data)-1)*sum(apply(data,2,var))
+  for (i in 2:nc){
+    set.seed(seed)
+    wss[i] <- sum(kmeans(data, centers=i)$withinss)}
+  plot(1:nc, wss, type="b", xlab="Number of Clusters",
+       ylab="Within groups sum of squares")
+  wss
+}
+
+# Determine number of clusters
+wssplot(data7)
+
+# Compute and visualize k-means clustering
+KM = kmeans(data7,5)
+autoplot(KM,data7,frame=TRUE)
+
+# Cluster centers
+KM$centers
+
+-----------------Multiple Linear Regression-----------------------------
+
+# Importing dataset
+dataset <- read.csv('winequality-white.csv')
+# Correlation 
+cor(dataset, use = "everything")
+cormat <- round(cor(dataset),2)
+library(reshape2)
+melted_cormat <- melt(cormat)
+
+# Visualising the correlation 
+library(ggplot2)
+ggplot(data = melted_cormat, aes(x=Var1, y=Var2, fill=value), ) + 
+  geom_tile() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+cona <- colnames(dataset)
+
+#Scaling
+#  dataset <- scale(dataset, center = TRUE, scale = FALSE)
+#  dataset <- as.data.frame(dataset)
+#  colnames(dataset) <- cona
+
+#Splitting the dataset into the Training set and test set
+library(caTools)
+set.seed(123)
+split = sample.split(dataset$alcohol, SplitRatio = 0.8)
+training_set = subset(dataset, split == TRUE)
+test_set = subset(dataset, split == FALSE)
+
+# Fitting Multiple Linear Regression to the Training set
+regressor = lm(formula = alcohol ~ ., 
+               data = training_set)
+summary(regressor)
+
+# Implementing automatic Backward Elimination of those variables not statistically significant
+backwardElimination <- function(x, sl) {numVars = length(x)
+for (i in c(1:numVars)){regressor = lm(formula = alcohol ~ ., data = x)
+maxVar = max(coef(summary(regressor))[c(2:numVars), "Pr(>|t|)"]) 
+if (maxVar > sl){
+  j = which(coef(summary(regressor))[c(2:numVars), "Pr(>|t|)"] == maxVar)
+  x = x[, -j]
+}
+numVars = numVars - 1
+}
+return(summary(regressor))
+}
+SL = 0.05
+dataset = dataset[, c(1,2,3,4,5,6,7,8,9,10,11,12)]
+backwardElimination(training_set, SL)
+
+
+# Predicting the Test set results
+y_pred = predict(regressor, newdata = test_set)
+y_pred
+
+# Simple Scatterplot
+plot(dataset$alcohol, dataset$fixed.acidity, main="Alcohol vs. Fixed Acidity", 
+     xlab="Alcohol", ylab="Fixed Acidity", pch=19)
+
+
+
+--------------------Logistic Regression ------------------------------
+
+# Logistic Regression - Wine Quality
+
+# Importing the dataset
+dataset = read.csv('winequality-white.csv')
+
+# Splitting the dataset into the Training set and Test set
+# install.packages('caTools')
+library(caTools)
+set.seed(123)
+dataset$quality = ifelse(dataset$quality/10 > 0.5, 1, 0)
+split = sample.split(dataset$quality, SplitRatio = 0.80)
+training_set = subset(dataset, split == TRUE)
+test_set = subset(dataset, split == FALSE)
+
+# Feature Scaling
+training_set[-12] = scale(training_set[-12])
+test_set[-12] = scale(test_set[-12])
+
+# Fitting Logistic Regression to the Training set
+classifier = glm(formula = quality ~ .,
+                 family = binomial,
+                 data = training_set)
+
+# Predicting the Test set results
+prob_pred = predict(classifier, type = 'response', newdata = test_set[-12])
+y_pred = ifelse(prob_pred > 0.5, 1, 0)
+
+# Making the Confusion Matrix
+cm = table(ifelse(test_set[, 12]>0.5,1,0), y_pred)
+print(cm)
+print(sum(cm[1,1],cm[2,2])/sum(cm))
+
+
+
+
+---------------------------------Naive Bayes---------------------------
+# Naive Bayes
+# Importing the dataset
+dataset = read.csv('winequality-white.csv')
+
+# Splitting the dataset into the Training set and Test set
+library(caTools)
+set.seed(123)
+dataset$quality = ifelse(dataset$quality/10 > 0.5, 1, 0)
+split = sample.split(dataset$quality, SplitRatio = 0.80)
+training_set = subset(dataset, split == TRUE)
+test_set = subset(dataset, split == FALSE)
+
+# Feature Scaling
+training_set[-12] = scale(training_set[-12])
+test_set[-12] = scale(test_set[-12])
+
+# Fitting SVM to the Training set
+# install.packages('e1071')
+library(e1071)
+classifier = naiveBayes(x = training_set[-12],
+                        y = training_set$quality)
+
+# Predicting the Test set results
+y_pred = predict(classifier, newdata = test_set[-12])
+
+# Making the Confusion Matrix
+cm = table(test_set[, 12], y_pred)
+print(cm)
+print(sum(cm[1,1],cm[2,2])/sum(cm))
+--------------------------------------------------------------
+
