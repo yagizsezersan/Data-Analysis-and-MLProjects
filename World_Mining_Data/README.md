@@ -72,6 +72,7 @@ The 'PoliticsEst' column was classified into 'Stable' and 'Unstable' categories 
 
 The top rows of the dataset for Dataset 2.  
 ![image](https://github.com/yagizsezersan/Data_Analysis_and_ML_Projects/assets/81651638/1ab6eb6f-a5ee-4ca0-a61b-a789a5a43770)
+
 Figure 2. ‘Dataset 2 head()’
 
 ## Data cleaning and transformation for Dataset 2
@@ -124,9 +125,11 @@ The analysis used SVM classification to predict the political situation based on
 
 ## 2.	Regression model result
 The obtained results are presented in Figure 4, which includes a summary table of different feature selection combinations and a scatter plot depicting the predicted values versus the actual values.
+
  ![image](https://github.com/yagizsezersan/Data_Analysis_and_ML_Projects/assets/81651638/702cac66-bc05-4dac-b876-a3e1346552b4)
  ![image](https://github.com/yagizsezersan/Data_Analysis_and_ML_Projects/assets/81651638/d86cff72-60ca-4ce7-87ea-acf2290187eb)
-  Figure 4. Summary Analysis and Predicted vs Actual Value scatter plot.
+
+Figure 4. Summary Analysis and Predicted vs Actual Value scatter plot.
 
 The selected Ridge Alpha regression model has R2 value of 0.905582, indicating that approximately 90.6% of the variance in the target variable (profit) can be explained by the model.
 
