@@ -7,20 +7,21 @@ Petrographics lab is a leading provider of petrographic sample prep, analysis, a
 The laboratory holds a pivotal position in supporting research studies in universities and various industries, including mining, petroleum, and construction. With an emphasis on geological sample preparation and petrographic analysis, the laboratory's services are vital for advancing scientific understanding and facilitating decision-making in these sectors.
 
 Problems that we try to address:
-	Can we predict the political situation of countries based on certain features to guide investment decisions for mining operations? Knowing the political situation in a region can help in making informed decisions about mining investments, considering stability and potential risks.
-	Certain features, such as political indicators or economic conditions, may influence mining investments and can be used to predict the political situation.
-	Can we determine an optimal pricing strategy based on quantity or other variables to maximize profit? Understanding the relationship between pricing, other variables, and profit can help in setting competitive prices and maintaining profitability.
-	I assume that there is a correlation between quantity or other variables and profit, suggesting that higher quantity orders may lead to higher profits.
-	What are the different customer segments based on their order completion time and ratings? Can we identify patterns in the completion time of orders and customer ratings? 
-	Customers with shorter order completion times tend to give higher ratings, indicating higher satisfaction levels.
+*	Can we predict the political situation of countries based on certain features to guide investment decisions for mining operations? Knowing the political situation in a region can help in making informed decisions about mining investments, considering stability and potential risks.
+*	Certain features, such as political indicators or economic conditions, may influence mining investments and can be used to predict the political situation.
+*	Can we determine an optimal pricing strategy based on quantity or other variables to maximize profit? Understanding the relationship between pricing, other variables, and profit can help in setting competitive prices and maintaining profitability.
+*	I assume that there is a correlation between quantity or other variables and profit, suggesting that higher quantity orders may lead to higher profits.
+*	What are the different customer segments based on their order completion time and ratings? Can we identify patterns in the completion time of orders and customer ratings? 
+*	Customers with shorter order completion times tend to give higher ratings, indicating higher satisfaction levels.
 
 ## Dataset Preparation: 
 
 Two different dataset is used for this project:
-  1 - Dataset that provides information about the total world production of mineral raw materials
+
+  * 1 - Dataset that provides information about the total world production of mineral raw materials
  https://www.world-mining-data.info/?World_Mining_Data___Data_Section
 
-  2 - Dataset from their database("VanPetroDatabase"). Since they know, I am going to submit it to college, they manipulated the data and if they like what I am trying to do, they will let me do analysis with their real data in future.
+  * 2 - Dataset from their database("VanPetroDatabase"). Since they know, I am going to submit it to college, they manipulated the data and if they like what I am trying to do, they will let me do analysis with their real data in future.
 Dataset 1
 This dataset will serve as resources for understanding world mining, making informed decisions, and drawing meaningful conclusions about the mining industry on global scale. 
 •	PetroDataset.xlsx:
